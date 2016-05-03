@@ -184,14 +184,16 @@ class Dropdown extends Widget {
     const text = state.focusOption ? state.focusOption.text :
                  (props.options.find(i => i.selected) || {text: '--请选择--'}).text;
     return (<div className={ `${prefixCls} ${prefixCls}-${this.instanceId} ${props.className || ''} ${(state.isInputing ? `${prefixCls}-isinputing` : '')}` }>
-      <div className={ `${prefixCls}-console` }
-           onClick={ state.isInputing ? undefined : this.handleEnableInputs.bind(this) }>
-        <input type="text" ref="inputText"
-               className={ `${prefixCls}-console-text` }
-               value={ text }
-               title={ text }
-               readOnly={ true } />
-        <span className={ `${prefixCls}-console-toggle` }>&nbsp;</span>
+      <div className={ `${prefixCls}-consolewrapper` }>
+        <div className={ `${prefixCls}-console` }
+             onClick={ state.isInputing ? undefined : this.handleEnableInputs.bind(this) }>
+          <input type="text" ref="inputText"
+                 className={ `${prefixCls}-console-text` }
+                 value={ text }
+                 title={ text }
+                 readOnly={ true } />
+          <span className={ `${prefixCls}-console-toggle` }>&nbsp;</span>
+        </div>
       </div>
     </div>);
   }
@@ -226,7 +228,7 @@ class Dropdown extends Widget {
         top = 0,
         left = 0;
     if (visible) {
-        inputEl = $(ReactDom.findDOMNode(this.refs.inputText));
+        inputEl = $(`.${prefixCls}-console`, ReactDom.findDOMNode(this));
         datapaneEl = $(`.${prefixCls}-datapane`, this.datapaneContainer);
         winEl = $(window);
         inputOffset = inputEl.offset();
@@ -264,8 +266,10 @@ class Dropdown extends Widget {
       "top": top + "px",
       "left": left + "px"
     }}>
-      <div className={ `${prefixCls}-datapane` }>
-        { props.getTemplateDatapane.call(this, this) }
+      <div className={ `${prefixCls}-datapanewrapper` }>
+        <div className={ `${prefixCls}-datapane` }>
+          { props.getTemplateDatapane.call(this, this) }
+        </div>
       </div>
     </div>, this.datapaneContainer);
   }

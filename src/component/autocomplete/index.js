@@ -56,15 +56,17 @@ class AutoComplete extends Dropdown {
                  props.text !== undefined ? props.text :
                  (props.options.find(i => i.selected) || {text: '--请选择--'}).text;
     return (<div className={ `${prefixCls} ${prefixCls}-${this.instanceId} ${props.className || ''} ${(state.isInputing ? `${prefixCls}-isinputing` : '')}` }>
-      <div className={ `${prefixCls}-console` }
-           onClick={ state.isInputing ? undefined : this.handleEnableInputs.bind(this) }>
-        <input type="text" ref="inputText"
-               className={ `${prefixCls}-console-text` }
-               value={ text }
-               title={ text }
-               onChange={ this.handleTextChange.bind(this) }
-               readOnly={ false } />
-        <span className={ `${prefixCls}-console-toggle` }>&nbsp;</span>
+      <div className={ `${prefixCls}-consolewrapper` }>
+        <div className={ `${prefixCls}-console` }
+             onClick={ state.isInputing ? undefined : this.handleEnableInputs.bind(this) }>
+          <input type="text" ref="inputText"
+                 className={ `${prefixCls}-console-text` }
+                 value={ text }
+                 title={ text }
+                 onChange={ this.handleTextChange.bind(this) }
+                 readOnly={ false } />
+          <span className={ `${prefixCls}-console-toggle` }>&nbsp;</span>
+        </div>
       </div>
     </div>);
   }

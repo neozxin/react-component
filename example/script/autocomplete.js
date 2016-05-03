@@ -95,7 +95,7 @@ function runner () {
                       runner();
                     } }
                     onOptionsChange={ (options) => {
-                      console.log('onChange Triggered:', evt);
+                      console.log('onChange Triggered:', options);
                       // const { options } = evt;
                       const selectedOption = options.find(i => i.selected);
                       example2.currentInput = $.extend(true, {}, selectedOption);
